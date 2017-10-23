@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Data-Wrangling2\"\nauthor: \"He Jin\"\ndate: \"10/23/2017\"\noutput: html_document\n---\n\n```{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = TRUE)\n```\n\n",
+    "created" : 1508779585216.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3789246329",
+    "id" : "684A99C6",
+    "lastKnownWriteTime" : 1508779611,
+    "last_content_update" : 1508779649011,
+    "path" : "~/Semester 1/DS-1/20171023/Reading data from web.Rmd",
+    "project_path" : "Reading data from web.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
