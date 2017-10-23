@@ -7,24 +7,42 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(rvest)
+library(httr)
+
 ```
 
-## R Markdown
+## Scraping
+## Extracting tables
+```{r}
+url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+drug_use_xml = read_html(url)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
+That's step one
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+drug_use_xml %>%
+  html_nodes(css = "table")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+table_marj = (drug_use_xml %>% html_nodes(css = "table"))[[1]] %>%  ## give me the first one
+  html_table() %>%
+  .[-1,] %>% 
+  as_tibble()
+table_marj
+```
+
+## class practice
+```{r}
+url2 = "https://www.bestplaces.net/cost_of_living/city/new_york/new_york"
+hotel_xml = read_html(url2)
+table_hotel = (hotel_xml %>% html_nodes(css = "table"))[[2]] %>% 
+  html_table(header = TRUE)
+
+```
+
