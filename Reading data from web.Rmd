@@ -46,3 +46,64 @@ table_hotel = (hotel_xml %>% html_nodes(css = "table"))[[2]] %>%
 
 ```
 
+## CSS selectors
+I want the names!!
+
+```{r}
+url3 = "http://www.imdb.com/title/tt0241527/"
+
+hpss_xml = read_html(url3)
+
+hpss_cast = hpss_xml %>%
+  html_nodes(".itemprop .itemprop") %>%
+  html_text()
+
+```
+
+```{r}
+url4 = "https://www.amazon.com/Philips-Sonicare-rechargeable-toothbrush-HX6211/product-reviews/B00YAR7ZFM/ref=cm_cr_arp_d_viewopt_srt?ie=UTF8&reviewerType=all_reviews&sortBy=recent&pageNumber=1"
+
+toothbrush_xml = read_html(url4)
+
+toothbrush_titles = toothbrush_xml %>% 
+  html_nodes(css = "#cm_cr-review_list .review-rating") %>% 
+  html_text()
+
+toothbrush_title = toothbrush_xml %>%
+  html_nodes(css = "#cm_cr-review_list .review-title") %>%
+  html_text()
+toothbrush_title
+toothbrush_titles
+```
+
+## Using an API
+### Water use data
+
+Getting the data from API
+```{r}
+nyc_water = GET("https://data.cityofnewyork.us/resource/waf7-5gvc.csv") %>% 
+  content("parsed")
+```
+
+Getting the data in json file 
+```{r}
+nyc_water = GET("https://data.cityofnewyork.us/resource/waf7-5gvc.json") %>% 
+  content("text") %>%
+  jsonlite::fromJSON() %>%
+  as_tibble()
+```
+
+### BRFSS
+```{r}
+brfss = 
+  GET("https://chronicdata.cdc.gov/api/views/hn4x-zwk7/rows.csv?accessType=DOWNLOAD") %>% 
+  content("parsed")
+```
+
+### Catch the pokemon
+```{r}
+poke = GET("http://pokeapi.co/api/v2/pokemon/1") %>%
+  content()
+poke$name
+poke$abilities
+```
